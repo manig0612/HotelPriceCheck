@@ -140,6 +140,7 @@ public class BookError {
 		
 		WebElement hotelList = driver.findElement(By.id("hotellist"));
 		List<WebElement> hotelprices = hotelList.findElements(By.tagName("strong"));
+		List<WebElement> hoteltitle = hotelList.findElements(By.tagName("h5"));
 		for (WebElement price : hotelprices) {
 			
 			dev.add(Integer.parseInt(price.getText().substring(2).replace(",", "")));
@@ -148,9 +149,22 @@ public class BookError {
 		
 		qa.addAll(dev);
 		Collections.sort(qa);
+		Collections.reverse(hoteltitle);
+		
+		
+		
+		System.out.println("******NOT MATHES HOTELS LIST***********");
 		for (int i = 0; i < qa.size(); i++) {
-			System.out.println("dev:" +"   " + dev.get(i) + "   " + "qa:" +"  " + qa.get(i));
+			boolean equals = dev.get(i).equals(qa.get(i));
+			if (!equals) {
+				System.out.println(hoteltitle.get(i).getText());
+			}
 				
+		}
+		System.out.println("**********HOTELS IS IN REVERSE ORDER************");
+		
+		for (WebElement reversedtitle : hoteltitle) {
+			System.out.println(reversedtitle.getText());
 		}
 		
 		
